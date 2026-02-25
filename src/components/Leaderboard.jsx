@@ -37,7 +37,7 @@ export default function Leaderboard({ teams }) {
             <div className="flex items-center gap-3 text-[0.7rem] text-slate-300 md:text-xs">
               <span>Pos {team.position + 1}</span>
               <span>Wrong {team.wrongAttempts}</span>
-              <span>Turns left {Math.max(0, 8 - team.turnsTaken)}</span>
+              <span>Turns left {Math.max(0, 10 - team.turnsTaken)}</span>
             </div>
           </div>
         ))}

@@ -52,7 +52,7 @@ export default function TeamPanel({
                 <span>Pos {team.position + 1}</span>
                 <span>Wrong {team.wrongAttempts}</span>
                 <span>
-                  Turns {team.turnsTaken}/8
+                  Turns {team.turnsTaken}/10
                 </span>
               </div>
             </div>

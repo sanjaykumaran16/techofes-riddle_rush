@@ -14,7 +14,7 @@ const RIDDLE_SCORES = {
   hard: { correct: 6, incorrect: -3 }
 };
 
-const MAX_TURNS_PER_TEAM = 8;
+const MAX_TURNS_PER_TEAM = 10;
 // 10 columns x 7 rows = 70 squares
 const BOARD_SIZE = 70;
 const SPECIAL_SQUARE_COUNT = 6;
