@@ -467,6 +467,7 @@ export default function App() {
               currentTeamId={null}
               onUpdateTeam={updateTeamMeta}
               gameStarted={false}
+                boardSize={BOARD_SIZE}
             />
           </div>
         )}
@@ -567,6 +568,7 @@ export default function App() {
                 currentTeamId={currentTeam ? currentTeam.id : null}
                 onUpdateTeam={updateTeamMeta}
                 gameStarted={gameStarted}
+                boardSize={BOARD_SIZE}
               />
               <Dice
                 value={diceValue}
