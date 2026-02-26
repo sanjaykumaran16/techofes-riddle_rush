@@ -6,9 +6,9 @@ import {
 } from "../data/riddles.js";
 
 const DIFFICULTY_LABELS = {
-  easy: "Easy (+2 / -6)",
-  medium: "Medium (+4 / -3)",
-  hard: "Hard (+6 / -1)"
+  easy: "Easy (+2 / -1)",
+  medium: "Medium (+4 / -2)",
+  hard: "Hard (+6 / -3)"
 };
 
 // Randomly select a riddle for the chosen difficulty.
@@ -93,7 +93,7 @@ export default function RiddleModal({
               >
                 Easy
                 <div className="mt-1 text-xs text-emerald-100">
-                  Correct +2, Wrong -6
+                  Correct +2, Wrong -1
                 </div>
               </button>
               <button
@@ -103,7 +103,7 @@ export default function RiddleModal({
               >
                 Medium
                 <div className="mt-1 text-xs text-amber-100">
-                  Correct +4, Wrong -3
+                  Correct +4, Wrong -2
                 </div>
               </button>
               <button
@@ -113,7 +113,7 @@ export default function RiddleModal({
               >
                 Hard
                 <div className="mt-1 text-xs text-rose-100">
-                  Correct +6, Wrong -1
+                  Correct +6, Wrong -3
                 </div>
               </button>
             </div>

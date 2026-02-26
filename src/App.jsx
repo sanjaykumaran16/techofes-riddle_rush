@@ -8,13 +8,13 @@ import SuddenDeath from "./components/SuddenDeath.jsx";
 import { clearGameState, loadGameState, saveGameState } from "./utils/persist.js";
 
 // Scoring configuration for riddle outcomes by difficulty.
-// easy:  correct +2,  wrong -6
-// medium: correct +4,  wrong -3
-// hard:  correct +6,  wrong -1
+// easy:  correct +2,  wrong -1
+// medium: correct +4,  wrong -2
+// hard:  correct +6,  wrong -3
 const RIDDLE_SCORES = {
-  easy: { correct: 2, incorrect: -6 },
-  medium: { correct: 4, incorrect: -3 },
-  hard: { correct: 6, incorrect: -1 }
+  easy: { correct: 2, incorrect: -1 },
+  medium: { correct: 4, incorrect: -2 },
+  hard: { correct: 6, incorrect: -3 }
 };
 
 const MAX_TURNS_PER_TEAM = 10;
