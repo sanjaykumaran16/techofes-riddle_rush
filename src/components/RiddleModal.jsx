@@ -33,34 +33,20 @@ export default function RiddleModal({
   const [step, setStep] = useState("select"); // 'select' | 'riddle'
   const [difficulty, setDifficulty] = useState(null);
   const [riddle, setRiddle] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(30);
 
   useEffect(() => {
     if (!isOpen) {
       setStep("select");
       setDifficulty(null);
       setRiddle(null);
-      setTimeLeft(30);
     }
   }, [isOpen]);
-
-  useEffect(() => {
-    if (step !== "riddle" || !isOpen) return;
-    // Simple countdown timer; when it hits zero we auto-mark as incorrect once.
-    if (timeLeft <= 0) {
-      onResult("incorrect", difficulty);
-      return;
-    }
-    const id = setTimeout(() => setTimeLeft((t) => t - 1), 1000);
-    return () => clearTimeout(id);
-  }, [timeLeft, step, isOpen, onResult, difficulty]);
 
   const handleSelectDifficulty = (level) => {
     const chosen = pickRiddle(level);
     setDifficulty(level);
     setRiddle(chosen);
     setStep("riddle");
-    setTimeLeft(30);
   };
 
   if (!isOpen || !team) return null;
@@ -122,21 +108,11 @@ export default function RiddleModal({
 
         {step === "riddle" && riddle && (
           <div className="space-y-5">
-            <div className="flex items-center justify-between">
-              <div className="text-sm md:text-base text-slate-300">
-                Difficulty:{" "}
-                <span className="font-semibold text-slate-100">
-                  {DIFFICULTY_LABELS[difficulty]}
-                </span>
-              </div>
-              <div
-                className={[
-                  "flex h-10 w-10 items-center justify-center rounded-full text-base md:text-lg font-semibold",
-                  timeLeft <= 5 ? "bg-rose-500 text-slate-900" : "bg-slate-800 text-slate-100"
-                ].join(" ")}
-              >
-                {timeLeft}
-              </div>
+            <div className="text-sm md:text-base text-slate-300">
+              Difficulty:{" "}
+              <span className="font-semibold text-slate-100">
+                {DIFFICULTY_LABELS[difficulty]}
+              </span>
             </div>
 
             <div className="rounded-xl bg-slate-800/80 p-4 text-base md:text-lg text-slate-50">
