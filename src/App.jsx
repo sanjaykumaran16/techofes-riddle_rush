@@ -8,10 +8,13 @@ import SuddenDeath from "./components/SuddenDeath.jsx";
 import { clearGameState, loadGameState, saveGameState } from "./utils/persist.js";
 
 // Scoring configuration for riddle outcomes by difficulty.
+// easy:  correct +2,  wrong -6
+// medium: correct +4,  wrong -3
+// hard:  correct +6,  wrong -1
 const RIDDLE_SCORES = {
-  easy: { correct: 2, incorrect: -1 },
-  medium: { correct: 4, incorrect: -2 },
-  hard: { correct: 6, incorrect: -3 }
+  easy: { correct: 2, incorrect: -6 },
+  medium: { correct: 4, incorrect: -3 },
+  hard: { correct: 6, incorrect: -1 }
 };
 
 const MAX_TURNS_PER_TEAM = 10;
@@ -121,7 +124,6 @@ export default function App() {
     () => initial?.currentTeamIndex ?? 0
   );
   const [diceValue, setDiceValue] = useState(() => initial?.diceValue ?? 1);
-  const [rolling, setRolling] = useState(false);
   const [board, setBoard] = useState(() =>
     initial?.board ? initial.board : createInitialBoard()
   );
@@ -165,7 +167,6 @@ export default function App() {
 
   const resetGame = () => {
     clearGameState();
-    setRolling(false);
     setTeams([]);
     setCurrentTeamIndex(0);
     setDiceValue(1);
@@ -266,7 +267,7 @@ export default function App() {
     });
   };
 
-  const handleRoll = () => {
+  const handleMove = (steps) => {
     if (!canRoll || !currentTeam) return;
 
     // Handle skip-next-turn square effect.
@@ -297,21 +298,9 @@ export default function App() {
       return;
     }
 
-    setRolling(true);
-    const finalValue = Math.floor(Math.random() * 6) + 1;
-
-    // Basic roll animation by updating dice value a few times.
-    let ticks = 0;
-    const rollInterval = setInterval(() => {
-      ticks += 1;
-      setDiceValue(Math.floor(Math.random() * 6) + 1);
-      if (ticks >= 8) {
-        clearInterval(rollInterval);
-        setDiceValue(finalValue);
-        setRolling(false);
-        applyMove(finalValue);
-      }
-    }, 80);
+    const clamped = Math.max(1, Math.min(6, steps));
+    setDiceValue(clamped);
+    applyMove(clamped);
   };
 
   // Apply movement, then resolve board square effects.
@@ -581,8 +570,7 @@ export default function App() {
               />
               <Dice
                 value={diceValue}
-                rolling={rolling}
-                onRoll={handleRoll}
+                onMove={handleMove}
                 disabled={!canRoll}
               />
               <Leaderboard teams={teams} />

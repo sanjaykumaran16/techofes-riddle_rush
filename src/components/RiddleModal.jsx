@@ -6,9 +6,9 @@ import {
 } from "../data/riddles.js";
 
 const DIFFICULTY_LABELS = {
-  easy: "Easy (+2 / -1)",
-  medium: "Medium (+4 / -2)",
-  hard: "Hard (+6 / -3)"
+  easy: "Easy (+2 / -6)",
+  medium: "Medium (+4 / -3)",
+  hard: "Hard (+6 / -1)"
 };
 
 // Randomly select a riddle for the chosen difficulty.
@@ -93,7 +93,7 @@ export default function RiddleModal({
               >
                 Easy
                 <div className="mt-1 text-xs text-emerald-100">
-                  Correct +2, Wrong -1
+                  Correct +2, Wrong -6
                 </div>
               </button>
               <button
@@ -103,7 +103,7 @@ export default function RiddleModal({
               >
                 Medium
                 <div className="mt-1 text-xs text-amber-100">
-                  Correct +4, Wrong -2
+                  Correct +4, Wrong -3
                 </div>
               </button>
               <button
@@ -113,7 +113,7 @@ export default function RiddleModal({
               >
                 Hard
                 <div className="mt-1 text-xs text-rose-100">
-                  Correct +6, Wrong -3
+                  Correct +6, Wrong -1
                 </div>
               </button>
             </div>
@@ -142,6 +142,21 @@ export default function RiddleModal({
             <div className="rounded-xl bg-slate-800/80 p-4 text-base md:text-lg text-slate-50">
               {riddle.question}
             </div>
+
+            {Array.isArray(riddle.options) && riddle.options.length > 0 && (
+              <div className="rounded-xl border border-slate-700 bg-slate-900/70 p-3 text-sm md:text-base text-slate-100">
+                <ul className="space-y-1.5">
+                  {riddle.options.map((opt, index) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="mt-[2px] inline-flex h-5 w-5 items-center justify-center rounded-full bg-slate-700 text-[0.7rem] md:text-xs">
+                        {index + 1}
+                      </span>
+                      <span>{opt}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
               <button
